@@ -1,0 +1,16 @@
+@startuml
+title: Interpret BMI results after calculation based on weight and height
+start
+:calculatedBMI;
+if (age > 20) then (yes)
+    :runAdultsInterpreter;
+else (no)
+    if (boy) then (yes)
+        :findBoysValues(Int: age);
+    else (no)
+        :findGirlsValues(Int: age);
+    endif
+    :runChildrenInterpreter(Int calculatedBMI, List<Double>: foundValues);
+endif
+stop
+@enduml
