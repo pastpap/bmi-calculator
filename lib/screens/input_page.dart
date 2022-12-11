@@ -1,13 +1,13 @@
 import 'package:bmi_calculator/constants/constants.dart';
 import 'package:bmi_calculator/enums/enums.dart';
 import 'package:bmi_calculator/utils/calculator.dart';
-import 'package:bmi_calculator/utils/calculator_argument.dart';
+import 'package:bmi_calculator/utils/model/calculator_argument.dart';
 import 'package:bmi_calculator/widgets/bottom_button.dart';
 import 'package:bmi_calculator/widgets/icon_content.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
+import 'package:bmi_calculator/widgets/round_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:bmi_calculator/widgets/round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -237,11 +237,12 @@ class _InputPageState extends State<InputPage> {
                   gender: selectedGender,
                   age: age,
                 );
+                calc.calculateBMI();
                 Navigator.pushNamed(context, Routes.RESULT.value,
                     arguments: CalculatorArguments(
-                      bmi: calc.calculateBMI(),
-                      result: calc.getResult(),
-                      interpretation: calc.getInterpretation(),
+                      bmi: calc.bmi.toStringAsFixed(1),
+                      result: calc.result.result,
+                      interpretation: calc.result.interpretation,
                     ));
               },
               buttonTile: 'CALCULATE',

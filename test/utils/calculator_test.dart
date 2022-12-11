@@ -9,6 +9,6 @@ void main() {
     final calculator =
         Calculator(height: 46, weight: 3, gender: Gender.MALE, age: 2);
     calculator.calculateBMI();
-    expect(calculator.getResult(), ResultType.UNDERWEIGHT.value);
+    expect(calculator.result.result, ResultType.UNDERWEIGHT.value);
   });
 }
