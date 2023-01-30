@@ -14,6 +14,7 @@ enum Routes {
 enum ResultType {
   UNDERWEIGHT('Underweight'),
   NORMAL('Normal'),
+  AT_RISK('At Risk'),
   OVERWEIGHT('Overweight');
 
   const ResultType(this.value);

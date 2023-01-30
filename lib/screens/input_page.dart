@@ -1,6 +1,7 @@
 import 'package:bmi_calculator/constants/constants.dart';
 import 'package:bmi_calculator/enums/enums.dart';
 import 'package:bmi_calculator/utils/calculator.dart';
+import 'package:bmi_calculator/utils/initialDataLoader.dart';
 import 'package:bmi_calculator/utils/model/calculator_argument.dart';
 import 'package:bmi_calculator/widgets/bottom_button.dart';
 import 'package:bmi_calculator/widgets/icon_content.dart';
@@ -19,6 +20,7 @@ class _InputPageState extends State<InputPage> {
   int height = 180;
   int weight = 80;
   int age = 25;
+  InitialDataLoader loader = InitialDataLoader();
 
   @override
   Widget build(BuildContext context) {
@@ -236,8 +238,9 @@ class _InputPageState extends State<InputPage> {
                   weight: weight,
                   gender: selectedGender,
                   age: age,
+                  loader: loader,
                 );
-                calc.calculateBMI();
+                calc.interpretBMI();
                 Navigator.pushNamed(context, Routes.RESULT.value,
                     arguments: CalculatorArguments(
                       bmi: calc.bmi.toStringAsFixed(1),
