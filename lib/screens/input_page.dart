@@ -104,7 +104,7 @@ class _InputPageState extends State<InputPage> {
                               RoundSliderOverlayShape(overlayRadius: 25)),
                       child: Slider(
                         value: height.toDouble(),
-                        min: 120.0,
+                        min: 50.0,
                         max: 220.0,
                         onChanged: ((double value) {
                           setState(() {
@@ -205,7 +205,7 @@ class _InputPageState extends State<InputPage> {
                               onPressed: () {
                                 setState(() {
                                   int candidateAge = age - 1;
-                                  age = candidateAge > 0 ? candidateAge : 0;
+                                  age = candidateAge > 1 ? candidateAge : 2;
                                 });
                               },
                             ),
