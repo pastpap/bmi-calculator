@@ -44,15 +44,14 @@ class _TapOrHoldButtonState extends State<TapOrHoldButton> {
   Widget build(BuildContext context) {
     var shape = CircleBorder();
     return Material(
-      color: Color(0xFF4C4F5E),
+      color: Color(0xFFf4a261),
       shape: shape,
       child: InkWell(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Icon(
             widget.icon,
-            color:
-                Theme.of(context).textTheme.headline1?.color ?? Colors.white70,
+            color: Theme.of(context).textTheme.headline1?.color ?? Colors.white,
             size: 39,
           ),
         ),
