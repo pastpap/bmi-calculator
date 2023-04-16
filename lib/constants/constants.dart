@@ -39,3 +39,19 @@ const kBMITextStyle = TextStyle(
 const kBMIBodyTextStyle = TextStyle(
   fontSize: 22.0,
 );
+
+getResultTextStyle(Color color) {
+  return TextStyle(
+    fontSize: 40.0,
+    fontWeight: FontWeight.bold,
+    color: color,
+  );
+}
+
+getBMITextStyle(Color color) {
+  return TextStyle(
+    fontSize: 100.0,
+    fontWeight: FontWeight.bold,
+    color: color.withOpacity(0.80),
+  );
+}

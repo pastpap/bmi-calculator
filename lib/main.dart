@@ -11,6 +11,7 @@ class BMICalculator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
           colorScheme: ColorScheme.fromSwatch(
             primarySwatch: createMaterialColor(Color(0xFF0077b6)),

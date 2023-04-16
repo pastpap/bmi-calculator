@@ -26,7 +26,7 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('BMI Wizzard'),
+          title: Text('BMI WIZARD'),
         ),
         body: Column(
           children: [
@@ -243,10 +243,10 @@ class _InputPageState extends State<InputPage> {
                 calc.interpretBMI();
                 Navigator.pushNamed(context, Routes.RESULT.value,
                     arguments: CalculatorArguments(
-                      bmi: calc.bmi.toStringAsFixed(1),
-                      result: calc.result.result,
-                      interpretation: calc.result.interpretation,
-                    ));
+                        bmi: calc.bmi.toStringAsFixed(1),
+                        result: calc.result.result,
+                        interpretation: calc.result.interpretation,
+                        color: calc.result.color));
               },
               buttonTile: 'CALCULATE',
             )

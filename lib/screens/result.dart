@@ -11,7 +11,7 @@ class Result extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as CalculatorArguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: Text('BMI WIZARD'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -38,11 +38,11 @@ class Result extends StatelessWidget {
                   children: [
                     Text(
                       args.result,
-                      style: kResultTextStyle,
+                      style: getResultTextStyle(args.color),
                     ),
                     Text(
                       args.bmi,
-                      style: kBMITextStyle,
+                      style: getBMITextStyle(args.color),
                     ),
                     Text(
                       args.interpretation,
