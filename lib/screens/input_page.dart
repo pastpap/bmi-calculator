@@ -1,13 +1,14 @@
 import 'package:bmi_calculator/constants/constants.dart';
 import 'package:bmi_calculator/enums/enums.dart';
 import 'package:bmi_calculator/utils/calculator.dart';
-import 'package:bmi_calculator/utils/calculator_argument.dart';
+import 'package:bmi_calculator/utils/initialDataLoader.dart';
+import 'package:bmi_calculator/utils/model/calculator_argument.dart';
 import 'package:bmi_calculator/widgets/bottom_button.dart';
 import 'package:bmi_calculator/widgets/icon_content.dart';
 import 'package:bmi_calculator/widgets/reusable_card.dart';
+import 'package:bmi_calculator/widgets/tap_or_hold_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:bmi_calculator/widgets/round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -19,12 +20,13 @@ class _InputPageState extends State<InputPage> {
   int height = 180;
   int weight = 80;
   int age = 25;
+  InitialDataLoader loader = InitialDataLoader();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('BMI CALCULATOR'),
+          title: Text('BMI Wizzard'),
         ),
         body: Column(
           children: [
@@ -66,57 +68,6 @@ class _InputPageState extends State<InputPage> {
               ],
             )),
             Expanded(
-              child: ReusableCard(
-                colour: kActiveCardColor,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'HEIGHT',
-                      style: kLabelStyle,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          height.toString(),
-                          style: kValueStyle,
-                        ),
-                        Text(
-                          'cm',
-                          style: kLabelStyle,
-                        ),
-                      ],
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                          activeTrackColor: Colors.white,
-                          inactiveTrackColor: Color(0xFF8D8E98),
-                          thumbColor: Color(0xFFEB1555),
-                          overlayColor: Color(0x29EB1555),
-                          thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 15),
-                          overlayShape:
-                              RoundSliderOverlayShape(overlayRadius: 25)),
-                      child: Slider(
-                        value: height.toDouble(),
-                        min: 120.0,
-                        max: 220.0,
-                        onChanged: ((double value) {
-                          setState(() {
-                            height = value.round();
-                          });
-                        }),
-                      ),
-                    )
-                  ],
-                ),
-                onPress: () {},
-              ),
-            ),
-            Expanded(
                 child: Row(
               children: [
                 Expanded(
@@ -143,9 +94,8 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundIconButton(
-                              icon: FontAwesomeIcons.minus,
-                              onPressed: () {
+                            TapOrHoldButton(
+                              onUpdate: () {
                                 setState(() {
                                   int candidateWeight = weight - 1;
                                   weight = candidateWeight > 10
@@ -153,13 +103,13 @@ class _InputPageState extends State<InputPage> {
                                       : 10;
                                 });
                               },
+                              icon: FontAwesomeIcons.minus,
                             ),
                             SizedBox(
                               width: 10.0,
                             ),
-                            RoundIconButton(
-                              icon: FontAwesomeIcons.plus,
-                              onPressed: () {
+                            TapOrHoldButton(
+                              onUpdate: () {
                                 setState(() {
                                   int candidateWeight = weight + 1;
                                   weight = candidateWeight < 300
@@ -167,6 +117,7 @@ class _InputPageState extends State<InputPage> {
                                       : 300;
                                 });
                               },
+                              icon: FontAwesomeIcons.plus,
                             ),
                           ],
                         )
@@ -198,21 +149,21 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundIconButton(
+                            TapOrHoldButton(
                               icon: FontAwesomeIcons.minus,
-                              onPressed: () {
+                              onUpdate: () {
                                 setState(() {
                                   int candidateAge = age - 1;
-                                  age = candidateAge > 0 ? candidateAge : 0;
+                                  age = candidateAge > 1 ? candidateAge : 2;
                                 });
                               },
                             ),
                             SizedBox(
                               width: 10.0,
                             ),
-                            RoundIconButton(
+                            TapOrHoldButton(
                               icon: FontAwesomeIcons.plus,
-                              onPressed: () {
+                              onUpdate: () {
                                 setState(() {
                                   int candidateAge = age + 1;
                                   age = candidateAge < 120 ? candidateAge : 120;
@@ -229,6 +180,57 @@ class _InputPageState extends State<InputPage> {
                 ),
               ],
             )),
+            Expanded(
+              child: ReusableCard(
+                colour: kActiveCardColor,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'HEIGHT',
+                      style: kLabelStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          height.toString(),
+                          style: kValueStyle,
+                        ),
+                        Text(
+                          'cm',
+                          style: kLabelStyle,
+                        ),
+                      ],
+                    ),
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.white,
+                          inactiveTrackColor: Color(0xFF0077b6),
+                          thumbColor: Color(0xFFf4a261),
+                          overlayColor: Color(0x29EB1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 25)),
+                      child: Slider(
+                        value: height.toDouble(),
+                        min: 50.0,
+                        max: 220.0,
+                        onChanged: ((double value) {
+                          setState(() {
+                            height = value.round();
+                          });
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+                onPress: () {},
+              ),
+            ),
             BottomButton(
               onTap: () {
                 Calculator calc = Calculator(
@@ -236,12 +238,14 @@ class _InputPageState extends State<InputPage> {
                   weight: weight,
                   gender: selectedGender,
                   age: age,
+                  loader: loader,
                 );
+                calc.interpretBMI();
                 Navigator.pushNamed(context, Routes.RESULT.value,
                     arguments: CalculatorArguments(
-                      bmi: calc.calculateBMI(),
-                      result: calc.getResult(),
-                      interpretation: calc.getInterpretation(),
+                      bmi: calc.bmi.toStringAsFixed(1),
+                      result: calc.result.result,
+                      interpretation: calc.result.interpretation,
                     ));
               },
               buttonTile: 'CALCULATE',
